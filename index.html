@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <title>HTML Calendar</title>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta property='og:url' content='https://www.example.com'>
+        <meta name='description' content='Bla bla...'>
+        <meta name='og:description' content='Bla bla...'>
+
+        <link href='/LaloGarcia_Libraries/js/HTML-Calendar/css/HTML-Calendar.css' rel='stylesheet' type='text/css'>
+
+
+        <style>
+
+            * {
+                font-family: helvetica, sans-serif, serif;
+                text-decoration: none;
+            }
+
+            .loaders-wrappers-style {
+                margin: 20px 0;
+                padding: 15px;
+                border-radius: 5px;
+                background-color: #e9eff4;
+                color: black;
+            }
+
+            .open-btn-example {
+                border:none;
+                background-color: #0f4690;
+                padding: 5px 10px;
+                font-size: 16px;
+                color: white;
+                cursor: pointer;
+            }
+
+            .calendar-date-display-selector-example {
+                padding: 5px;
+                font-size: 16px;
+                border: 1px solid grey;
+                width: 150px;
+            }
+
+
+            .open-btn-example,
+            .calendar-date-display-selector-example {
+                display: inline-block;
+            }
+
+        </style>
+    </head>
+
+    <body>
+
+
+        <div class="loaders-wrappers-style" data-clg-loader-ref=''>
+            <h4>Example #1</h4>
+            <ul>
+                <li>Calendar Format: Short Words</li>
+                <li>Input element</li>
+                <li>Show date on page load? YES</li>
+                <li>With open button</li>
+                <li>English</li>
+            </ul>
+
+            <input data-clg-date-format-display='words-short' data-clg-date-language='english' class='calendar-date-display-selector-example' data-display-actual-date-on-load='yes'>
+
+            <button data-clg-date-opener='' class='open-btn-example'>Open</button>
+        </div>
+
+
+
+        <div class="loaders-wrappers-style" data-clg-loader-ref=''>
+            <h4>Example #2</h4>
+            <ul>
+                <li>Calendar Format: Default</li>
+                <li>Input element</li>
+                <li>Show date on page load? NO</li>
+                <li>With open button</li>
+                <li>Spanish</li>
+            </ul>
+
+            <input data-clg-date-format-display='words-complete' data-clg-date-language='spanish' data-display-actual-date-on-load='no' class='calendar-date-display-selector-example'>
+
+            <button data-clg-date-opener='' class='open-btn-example'>Open</button>
+        </div>
+
+
+
+        <div class="loaders-wrappers-style" data-clg-loader-ref=''>
+            <h4>Example #3</h4>
+            <ul>
+                <li>Calendar Format: Default</li>
+                <li>Input element</li>
+                <li>Show date on page load? NO</li>
+                <li>With NO open button</li>
+                <li>French</li>
+            </ul>
+
+            <input data-clg-date-format-display='words-complete' data-clg-date-language='french' data-clg-date-opener='' class='calendar-date-display-selector-example' data-display-actual-date-on-load='no'>
+        </div>
+
+
+
+        <div class="loaders-wrappers-style" data-clg-loader-ref=''>
+            <h4>Example #4</h4>
+            <ul>
+                <li>Calendar Format: Numeric</li>
+                <li>Input element</li>
+                <li>Show date on page load? YES</li>
+                <li>With NO open button</li>
+                <li>English</li>
+            </ul>
+
+            <input data-clg-date-format-display='numeric' data-clg-date-language='english' data-clg-date-opener='' class='calendar-date-display-selector-example' data-display-actual-date-on-load='yes'>
+        </div>
+
+
+
+        <div class="loaders-wrappers-style" data-clg-loader-ref=''>
+            <h4>Example #4</h4>
+            <ul>
+                <li>Calendar Format: Default</li>
+                <li>Div element</li>
+                <li>Show date on page load? NO</li>
+                <li>With NO open button</li>
+                <li>English</li>
+            </ul>
+
+            <div data-clg-date-format-display='' data-clg-date-language='english' data-clg-date-opener='' class='calendar-date-display-selector-example' data-display-actual-date-on-load='yes'></div>
+        </div>
+
+
+
+        <div class="loaders-wrappers-style" data-clg-loader-ref=''>
+            <h4>Example #5</h4>
+            <ul>
+                <li>
+                    <strong>
+                        Data Attrs are in individual HTML selectors<br>(No need to fill a selector of the calendar data-attrs)
+                    </strong>
+                    <br>
+                    <br>
+                </li>
+                <li>Calendar Format: Default</li>
+                <li>Div element</li>
+                <li>Show date on page load? NO</li>
+                <li>With open button</li>
+                <li>English</li>
+            </ul>
+
+            <span data-clg-date-language='english'></span>
+            <span data-display-actual-date-on-load='yes'></span>
+
+            <div data-clg-date-format-display='' class='calendar-date-display-selector-example'></div>
+            <button data-clg-date-opener='' class='open-btn-example'>Open</button>
+        </div>
+
+
+    </body>
+</html>
+
+<script src='/LaloGarcia_Libraries/js/HTML-Calendar/HTML-Calendar.min.js'></script>
+
+
