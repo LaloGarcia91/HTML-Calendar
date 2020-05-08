@@ -4,11 +4,11 @@ MEDIA QUERIES
 
 
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 350px) {
 
     .lalo-calendar-wrapper {
-        left:50% !important;
-        transform: translateX(-50%);
+        left: 50% !important;
+        transform: translateX(-50%) !important;
     }
 
 }
@@ -18,7 +18,6 @@ MEDIA QUERIES
 /*
 *************************
 */
-
 [data-lalo-calendar] {
     position: relative;
 }
@@ -29,6 +28,7 @@ MEDIA QUERIES
 
 
 .lalo-calendar-wrapper {
+    position: absolute;
     display:none;
     border-radius: 5px;
     box-shadow: 0px 0px 10px black;
@@ -37,7 +37,9 @@ MEDIA QUERIES
     background-color: #2b4059;
     overflow: hidden;
     width: 290px;
-    margin: 10px;
+    margin: 5px;
+    opacity:0;
+    z-index: 100000;
 }
 
 .lalo-calendar-close-btn {

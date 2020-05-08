@@ -1,7 +1,6 @@
 "use-strict"
 
 CalendarINIT();
-
 function CalendarINIT(){
     var c_MainCalendarStructureGUI = new MainCalendarStructureGUI();
     c_MainCalendarStructureGUI.Init();

@@ -13,6 +13,7 @@ function CalendarEventsManager(){
     private_.AlterCalendarGUI = AlterCalendarGUI();
     private_.GetCalendarInfos = GetCalendarInfos();
     private_.CalendarSelectors = CalendarSelectors();
+    private_.PositionCalendar = PositionCalendar();
     private_.allCalendarsLoaders = private_.GetCalendarInfos.allCalendarsLoaders;
     
     private_.currentIndexOfDisplayedMonth = null;
@@ -76,6 +77,10 @@ function CalendarEventsManager(){
         var calendarOpener = calendarLoader.querySelector('[data-lalo-calendar-opener]');
         calendarOpener.addEventListener('click', function(e){
             private_.AlterCalendarGUI.ShowCalendar(calendarLoader);
+        }, false);
+        
+        window.addEventListener('resize', function(){
+            private_.PositionCalendar.PositionCalendarWhenOpened(calendarLoader);
         }, false);
     }
 

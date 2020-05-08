@@ -36,7 +36,7 @@ function MainCalendarStructureGUI(){
             var calendarWrapper = private_.Wrapper();
             var table = private_.BuildCalendarTable();
             
-            private_.MakeCalendarOpenerAsReadonly(calendarLoader);
+            private_.MakeDateDisplayedAsReadOnly(calendarLoader);
             calendarWrapper.appendChild(table);
             calendarLoader.appendChild(calendarWrapper);
         }
@@ -332,8 +332,8 @@ function MainCalendarStructureGUI(){
 
 
 
-    private_.MakeCalendarOpenerAsReadonly = function(calendarLoader){
-        calendarLoader.querySelector('[data-lalo-calendar-opener]').setAttribute('readonly', 'true');
+    private_.MakeDateDisplayedAsReadOnly = function(calendarLoader){
+        calendarLoader.querySelector('[data-lalo-calendar-display-format]').setAttribute('readonly', 'true');
     }
     
 

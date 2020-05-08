@@ -8,6 +8,8 @@ function AlterCalendarGUI(){
     private_.CalendarReferences = CalendarReferences();
     private_.SaveCalendarInfos = SaveCalendarInfos();
     private_.GetCalendarInfos = GetCalendarInfos();
+    private_.PositionCalendar = PositionCalendar();
+    private_.CalendarSelectors = CalendarSelectors();
     //private_.MainCalendarStructureGUI = MainCalendarStructureGUI();
     
     
@@ -22,7 +24,7 @@ function AlterCalendarGUI(){
 
         for(var i=0; i<allCalendarsLoaders.length; i++){
             var calendarLoader = allCalendarsLoaders[i];
-            var calendarWrapper = calendarLoader.querySelector('.js-lalo-calendar--wrapper');
+            var calendarWrapper = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
             var currentDate = calendarReferences.currentDateAsNumeric;
 
             var monthIndex = currentDate.monthIndex;
@@ -44,7 +46,7 @@ function AlterCalendarGUI(){
 
 
     public_.ShowCalendarDateInSelectorDisplay = function(calendarLoader){
-        var calendar = calendarLoader.querySelector('.js-lalo-calendar--wrapper');
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
 
         if( private_.GetCalendarInfos.CheckIfAMonthDayIsSelected(calendar) ){
             var calendarReferences = private_.CalendarReferences;
@@ -126,7 +128,7 @@ function AlterCalendarGUI(){
     
     
     public_.UpdateDateInSelectorDisplay = function(calendarLoader, monthIndex, day, year, weekDayIndex){
-        var calendar = calendarLoader.querySelector('.js-lalo-calendar--wrapper');
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var selectorThatDisplaysDate = calendarLoader.querySelector('[data-lalo-calendar-display-format]');
         var typeOfDisplay = selectorThatDisplaysDate.tagName.toLowerCase();
         var formatedDate = public_.FormatThisDate(calendarLoader, monthIndex, day, year, weekDayIndex);
@@ -231,7 +233,7 @@ function AlterCalendarGUI(){
     
     
     public_.HighlightClickedMonthDay = function(calendarLoader, monthDayClicked){
-        var calendar = calendarLoader.querySelector('.js-lalo-calendar--wrapper');
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
 
         var monthDayAttrRef = 'data-belongs-to-month-day';
         var css_selectedDay = 'css-js-selected-day-highlight';
@@ -252,16 +254,18 @@ function AlterCalendarGUI(){
     
     
     public_.HideCalendar = function(calendarLoader){
-        var calendar = calendarLoader.querySelector('.js-lalo-calendar--wrapper');
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         calendar.style.display = 'none';
     }
 
 
 
     public_.ShowCalendar = function(calendarLoader){
-        var calendar = calendarLoader.querySelector('.js-lalo-calendar--wrapper');
-        public_.DisplayCurrentSavedAndShownDateInCalendar(calendarLoader);
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         calendar.style.display = 'block';
+        public_.DisplayCurrentSavedAndShownDateInCalendar(calendarLoader);
+        private_.PositionCalendar.PositionCalendarWhenOpened(calendarLoader);
+        calendar.style.opacity = 1;
     }
 
 
@@ -279,7 +283,7 @@ function AlterCalendarGUI(){
 
 
     public_.DisplayCurrentSavedAndShownDateInCalendar = function(calendarLoader){
-        var calendarOpener = calendarLoader.querySelector('[data-lalo-calendar-opener]');
+        var calendarOpener = calendarLoader.querySelector('[data-lalo-calendar-display-format]');
         var savedDate = calendarOpener.getAttribute('data-date-displayed');
         savedDate = JSON.parse(savedDate);
 

@@ -117,7 +117,7 @@ function GetCalendarInfos(){
         var monthsArray = MonthsArray(language);
         var weekDaysArray = DaysOfWeekArray(language);
 
-        return {    
+        return {
             whatIsThis:'This property returns the calendar date as short words: Jan, Feb.. Sun, Mon..',
             month:monthsArray[monthIndex].substring(0, 3),
             day:monthDay,
