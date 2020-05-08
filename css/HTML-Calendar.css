@@ -6,7 +6,7 @@ MEDIA QUERIES
 
 @media only screen and (max-width: 500px) {
 
-    .calendar-lalo-garcia-main-wrapper {
+    .lalo-calendar-wrapper {
         left:50% !important;
         transform: translateX(-50%);
     }
@@ -19,166 +19,165 @@ MEDIA QUERIES
 *************************
 */
 
-
-[data-clg-loader-ref] {
+[data-lalo-calendar] {
     position: relative;
-    background-color: transparent;
+}
+
+[data-lalo-calendar-display-format] {
+    text-transform: capitalize;
 }
 
 
-.calendar-lalo-garcia-main-wrapper {
+.lalo-calendar-wrapper {
     display:none;
-    position: absolute;
-    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px black;
+    padding: 10px;
+    padding-top: 0;
     background-color: #2b4059;
-    padding-right: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    z-index: 1000;
-    box-shadow:0px 0px 20px black;
-    border-radius: 4px;
+    overflow: hidden;
     width: 290px;
+    margin: 10px;
 }
 
-.calendar-lalo-garcia-inner-wrapper {
+.lalo-calendar-close-btn {
+    float:right;
+    font-size: 22px;
+    padding: 4px 0;
+    cursor: pointer;
+    color:white;
+}
+
+.lalo-calendar-close-btn:hover {
+    color: red;
+}
+
+
+.lalo-calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.lalo-calendar-table-thead {
+    background-color: #2259a3;
+}
+
+.lalo-calendar-month-row {
+
+}
+
+.lalo-calendar-year-row {
+
+}
+
+.lalo-calendar-all-cells {
+    padding: 0;
+}
+
+.lalo-calendar-years-display {
+
+}
+
+.lalo-calendar-month-cell,
+.lalo-calendar-year-cell {
     position: relative;
     overflow: hidden;
-    border-radius: 4px;
 }
 
-.table-calendar-lalo-garcia {
-    border-collapse: collapse;
-    background-color: white;
-    width: 100%;
+.lalo-calendar-months-display {
+    text-transform: capitalize;
 }
 
-.calendar-lalo-garcia-check-btns,
-.calendar-lalo-garcia-close-btns {
-    font-size: 24px;
-    cursor: pointer;
-    color:white;
-    border-radius:50%;
+.lalo-calendar-years-display,
+.lalo-calendar-months-display {
+    overflow: hidden;
     text-align: center;
-    z-index: 1000;
+    font-size: 20px;
+    padding: 5px;
+    color: white;
+}
+
+
+.lalo-calendar-table-tbody {
+    background-color: white;
+}
+
+.lalo-calendar-table-weeks-days-cells {
+    border-bottom: none;
+    text-align: center;
+    padding: 5px;
+}
+
+[data-belongs-to-month-day] {
+    cursor: pointer;
+}
+
+[data-belongs-to-month-day]:hover {
+    background-color: #cfffd3;
+}
+
+
+.lalo-calendar-weekdays-name-display {
+    color: white;
+    text-align: center;
+    text-transform: capitalize;
+    background-color: #2b4059;
+    padding: 5px 7px;
+    width: 40px;
+    font-size:14px;
+}
+
+
+.css-js-highlight-year,
+.css-js-highlight-month {
+    font-weight: bold;
+    color: lime;
+}
+
+.css-js-highlight-actual-month-day {
+    background-color: lightgrey;
     font-weight: bold;
 }
 
-.calendar-lalo-garcia-check-btns {
-    margin-left: 10px;
-}
-
-.calendar-lalo-garcia-close-btns:hover {
-    color:red;
-}
-
-.calendar-lalo-garcia-check-btns:hover {
-    color:greenyellow;
-}
-
-
-.years-cell-wrapper-calendar-lalo-garcia,
-.months-cell-wrapper-calendar-lalo-garcia,
-.cells-calendar-lalo-garcia {
-
-}
-
-.week-days-names-cells-calendar-lalo-garcia, 
-.cells-calendar-lalo-garcia {
-    padding: 5px 7px;
-    text-align: center;
-}
-
-
-.cells-calendar-lalo-garcia:hover {
-    background-color: #ffffc4;
-    cursor:pointer;
-}
-
-.css-js-calendar-lalo-garcia-selected-day {
-    background-color: #b6ff5e !important;
-}
-
-
-
-.year-select-calendar-lalo-garcia,
-.month-select-calendar-lalo-garcia {
-    display:block;
-    border: none;
-    font-size:18px;
-    width: 100%;
-    margin: 10px 0;
-    text-align: center;
-    text-transform: capitalize;
-}
-
-.months-cell-wrapper-calendar-lalo-garcia, 
-.years-cell-wrapper-calendar-lalo-garcia {
-    position: relative;
-    color:white;
-}
-
-.week-days-calendar-lalo-garcia {
-    text-transform: capitalize;
-    background-color: #273b53;
-    width:14.28%;
-    color:white;
-}
-
-
-
-
-.month-select-right-btn,
-.month-select-left-btn,
-.year-select-right-btn,
-.year-select-left-btn
-{
+.lalo-calendar-month-year-btns {
     position: absolute;
     display: block;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    color:white;
+    transition: 0.15s;
+    border:none;
+}
+
+.lalo-calendar-month-year-right-btn {
     top:0;
     bottom:0;
-    background-color: transparent;
-    font-size: 22px;
-    color:white;
-    border:none;
-    cursor: pointer;
+    right:0;
+    background: linear-gradient(90deg, #2259a3, #2b4059);
 }
 
-.months-and-years-select-ref-btns:active {
-    background-color: #3768a5;
+.lalo-calendar-month-year-left-btn {
+    top:0;
+    bottom:0;
+    left:0;
+    background: linear-gradient(-90deg, #2259a3, #2b4059);
 }
 
-
-.month-select-right-btn,
-.year-select-right-btn {
-    right: 0;
-}
-
-.month-select-left-btn,
-.year-select-left-btn {
-    left: 0;
+.lalo-calendar-month-year-btns:active {
+    transform: scale(1.3);
 }
 
 
-.thead-calendar-lalo-garcia {
-    background-color: #315d94;
+.lalo-calendar-table-weeks-rows {
+    border-bottom: 1px solid #f0f0f0;
 }
 
-.calendar-top-btns-main-wrapper {
-    text-align: right;
-    padding: 5px 0;
+.lalo-calendar-table-weeks-rows:last-child {
+    border: none;
 }
 
-
-.calendar-lalo-garcia-correct-month-day-select {
-    background-color: #cecece;
-    font-weight: bold;
-}
-
-.calendar-lalo-garcia-correct-month-and-year-select {
-    font-weight: bold;
-    color:#b2ff90;
-}
-
-.tbody-calendar-lalo-garcia {
-    color: black;
+.css-js-selected-day-highlight {
+    background-color: lime !important;
+    box-shadow: inset 0px 0px 0px 2px #005dd5;
 }

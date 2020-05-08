@@ -3,7 +3,7 @@ function createNewElement(objectParameter){
     /*
     This are ALL of the properties that this function accepts, if you use this function you can either use all of the properties mentioned below, or only 1. It is not a MUST to use all of the properties. As you can see, this function receives as parameter, an object just like the one below. Again, you don't have to use all of the properties.
 
-    The following object example is also NEEDED to use this function, so please don't delete it. I created it mainly to use it as an example. Although feel free to do whatever you want with this function.
+    The following object example is also NEEDED to use this function, so please don't delete it. Although feel free to do whatever you want with this function.
     */
     var elementObject = {
         returnAsString:objectParameter.returnAsString,
@@ -135,7 +135,7 @@ function createNewElement(objectParameter){
         var newElement = document.createElement(elementObject.element);
 
 
-        if(elementObject.classes && elementObject.classes[0]){
+        if(elementObject.classes && elementObject.classes.length > 0){
             newElementClasses();
         }
 
@@ -184,12 +184,17 @@ function createNewElement(objectParameter){
 
     function newElementClasses(){
         var allClasses = elementObject.classes;
+        
+        if (typeof allClasses == 'string'){
+            allClasses = allClasses.split(' '); // convert string as array
+        }
 
         Array.prototype.forEach.call(allClasses, function(className){
-            if(className.length>0){
+            if( className.length > 0 ){
                 newElement.classList.add(className.trim());
             }
         });
+        
     }
 
     //

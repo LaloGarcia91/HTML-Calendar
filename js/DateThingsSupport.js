@@ -1,4 +1,7 @@
 
+
+
+
 function CurrentDate(returnType, language){
 
 
@@ -38,7 +41,7 @@ function CurrentDate(returnType, language){
         case 'object':
             return asObject; 
 
-        case 'object-numbers':
+        case 'object-numeric':
             return asNumbers;
 
         case 'string':
@@ -83,26 +86,30 @@ function GetThisDateInfo(language, thisMonth, thisDayOfMonth, thisYear, returnTy
 
 
     //
-    var asObject = {
-        weekDay:finalWeekDay,
+    var asNumbers = {
+        weekDayIndex:date.getDay(),
         monthDay:finalDayOfMonth,
-        month:finalMonth,
+        monthIndex:date.getMonth(),
         year:year
     };
 
+    //
     var asString = finalWeekDay+", "+finalDayOfMonth+" "+finalMonth+", "+year;
-
 
 
     //
     switch(returnType){
         case 'object':
-            return asObject;
+            return asObject; 
+
+        case 'object-numeric':
+            return asNumbers;
 
         case 'string':
         default:
             return asString;
     }
+
 
 }
 
@@ -297,7 +304,6 @@ function GetCurrentYear(){
 
 function MonthsArray(language){
 
-
     if(language){
         return  AllMonths()[language];
     } else {
@@ -306,75 +312,72 @@ function MonthsArray(language){
 
 
     function AllMonths(){
-
         return {
-
-            //
-            english: function(){
-                var months = [];
-
-                months[0] = "january";
-                months[1] = "february";
-                months[2] = "march";
-                months[3] = "april";
-                months[4] = "may";
-                months[5] = "june";
-                months[6] = "july";
-                months[7] = "august";
-                months[8] = "september";
-                months[9] = "october";
-                months[10] = "november";
-                months[11] = "december";
-
-                return months;
-            }(),
-
-
-            //
-            spanish: function(){
-                var months = [];
-
-                months[0] = "enero";
-                months[1] = "febrero";
-                months[2] = "marzo";
-                months[3] = "abril";
-                months[4] = "mayo";
-                months[5] = "junio";
-                months[6] = "julio";
-                months[7] = "agosto";
-                months[8] = "septiembre";
-                months[9] = "octubre";
-                months[10] = "noviembre";
-                months[11] = "diciembre";
-
-                return months;
-            }(),
-
-
-            //
-            french: function(){
-                var months = [];
-
-                months[0] = "janvier";
-                months[1] = "fevrier";
-                months[2] = "mars";
-                months[3] = "avril";
-                months[4] = "mai";
-                months[5] = "juin";
-                months[6] = "juillet";
-                months[7] = "août";
-                months[8] = "septembre";
-                months[9] = "octobre";
-                months[10] = "novembre";
-                months[11] = "décembre";
-
-                return months;
-            }()
-
+            english: English(),
+            spanish: Spanish(),
+            french: French()
         };
-
     }
 
+
+    function English(){
+        return function(){
+            var months = [];
+            months[0] = "january";
+            months[1] = "february";
+            months[2] = "march";
+            months[3] = "april";
+            months[4] = "may";
+            months[5] = "june";
+            months[6] = "july";
+            months[7] = "august";
+            months[8] = "september";
+            months[9] = "october";
+            months[10] = "november";
+            months[11] = "december";
+            return months;
+        }()
+    }
+
+
+    function Spanish(){
+        return function(){
+            var months = [];
+            months[0] = "enero";
+            months[1] = "febrero";
+            months[2] = "marzo";
+            months[3] = "abril";
+            months[4] = "mayo";
+            months[5] = "junio";
+            months[6] = "julio";
+            months[7] = "agosto";
+            months[8] = "septiembre";
+            months[9] = "octubre";
+            months[10] = "noviembre";
+            months[11] = "diciembre";
+            return months;
+        }()
+    }
+
+
+    function French(){
+        return function(){
+            var months = [];
+            months[0] = "janvier";
+            months[1] = "fevrier";
+            months[2] = "mars";
+            months[3] = "avril";
+            months[4] = "mai";
+            months[5] = "juin";
+            months[6] = "juillet";
+            months[7] = "août";
+            months[8] = "septembre";
+            months[9] = "octobre";
+            months[10] = "novembre";
+            months[11] = "décembre";
+            return months;
+        }()
+    }
 }
 
 //
@@ -479,71 +482,65 @@ function ReturnCurrentYearAsHTMLoption(){
 
 function DaysOfWeekArray(language){
 
-
     if(language){
         return  AllDaysOfWeek()[language];
     } else {
-        return  AllMonths();
+        return  AllDaysOfWeek();
     }
-
 
 
     function AllDaysOfWeek(){
-
         return {
-
-            //
-            english: function(){
-                var weekDay = [];
-
-                weekDay[0] = "sunday";
-                weekDay[1] = "monday";
-                weekDay[2] = "tuesday";
-                weekDay[3] = "wednesday";
-                weekDay[4] = "thursday";
-                weekDay[5] = "friday";
-                weekDay[6] = "saturday";
-
-                return weekDay;
-            }(),
-
-
-            //
-            spanish: function(){
-                var weekDay = [];
-
-                weekDay[0] = "domingo";
-                weekDay[1] = "lunes";
-                weekDay[2] = "martes";
-                weekDay[3] = "miercoles";
-                weekDay[4] = "jueves";
-                weekDay[5] = "viernes";
-                weekDay[6] = "sabado";
-
-                return weekDay;
-            }(),
-
-
-            //
-            french: function(){
-                var weekDay = [];
-
-                weekDay[0] = "dimanche";
-                weekDay[1] = "lundi";
-                weekDay[2] = "mardi";
-                weekDay[3] = "mercredi";
-                weekDay[4] = "jeudi";
-                weekDay[5] = "vendredi";
-                weekDay[6] = "samedi";
-
-                return weekDay;
-            }()
-
+            english: English(),
+            spanish: Spanish(),
+            french: French()
         };
-
     }
 
 
+    function English(){
+        return function(){
+            var weekDay = [];
+            weekDay[0] = "sunday";
+            weekDay[1] = "monday";
+            weekDay[2] = "tuesday";
+            weekDay[3] = "wednesday";
+            weekDay[4] = "thursday";
+            weekDay[5] = "friday";
+            weekDay[6] = "saturday";
+            return weekDay;
+        }()
+    }
+
+
+    function Spanish(){
+        return function(){
+            var weekDay = [];
+            weekDay[0] = "domingo";
+            weekDay[1] = "lunes";
+            weekDay[2] = "martes";
+            weekDay[3] = "miercoles";
+            weekDay[4] = "jueves";
+            weekDay[5] = "viernes";
+            weekDay[6] = "sabado";
+            return weekDay;
+        }()
+    }
+
+
+    function French(){
+        return function(){
+            var weekDay = [];
+            weekDay[0] = "dimanche";
+            weekDay[1] = "lundi";
+            weekDay[2] = "mardi";
+            weekDay[3] = "mercredi";
+            weekDay[4] = "jeudi";
+            weekDay[5] = "vendredi";
+            weekDay[6] = "samedi";
+            return weekDay;
+        }()
+    }
 }
 
 //
@@ -559,4 +556,8 @@ function ReturnIndexOfFirstWeekDayOfAMonth(language, monthIndex, year){
 
     return daysOfWeek.indexOf(getThisDate.weekDay);
 }
+
+
+
+
 
