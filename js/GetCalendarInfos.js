@@ -130,7 +130,17 @@ function GetCalendarInfos(){
     public_.GetCalendarLanguage = function(calendarLoader){
         var languageAttr = 'data-lalo-calendar-language';
         var languageSelector = calendarLoader.querySelector('['+languageAttr+']');
-        return languageSelector.getAttribute(languageAttr);
+        
+        if(languageSelector){
+            var language = languageSelector.getAttribute(languageAttr);
+            switch(language){
+                case 'english':
+                case 'spanish':
+                case 'french':
+                    return language;
+            }
+        }
+        return 'english'; // default language if nothing was provided
     }
     
     

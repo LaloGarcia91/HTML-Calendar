@@ -284,7 +284,7 @@ function AlterCalendarGUI(){
 
     public_.DisplayCurrentSavedAndShownDateInCalendar = function(calendarLoader){
         var calendarOpener = calendarLoader.querySelector('[data-lalo-calendar-display-format]');
-        var savedDate = calendarOpener.getAttribute('data-date-displayed');
+        var savedDate = calendarOpener.getAttribute('data-get-date-displayed');
         savedDate = JSON.parse(savedDate);
 
         public_.DisplaySavedDateMonthInCalendar(calendarLoader, savedDate);

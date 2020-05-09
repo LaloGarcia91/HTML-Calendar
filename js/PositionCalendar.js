@@ -15,8 +15,8 @@ function PositionCalendar(){
         private_.AutoPositionCalendarHorizontally(calendarLoader);
     }
 
-
-
+    
+    
     private_.AutoPositionCalendarVertically = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var calendarLoaderRects = calendarLoader.getBoundingClientRect();
@@ -25,13 +25,13 @@ function PositionCalendar(){
         var finalTopDistance = calendarLoaderRects.height;
         calendar.style.top = finalTopDistance+'px';
     }
-
-
-
+    
+    
+    
     private_.AutoPositionCalendarHorizontally = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var calendarRects = calendar.getBoundingClientRect();
-
+        
         var calendarOpener = private_.CalendarSelectors.GetCalendarOpener(calendarLoader);
         var calendarOpenerRects = calendarOpener.getBoundingClientRect();
         var calendarOpenerSpaceToTheLeft = calendarOpenerRects.left;
@@ -48,8 +48,8 @@ function PositionCalendar(){
             calendar.style.left = calendarOpenerSpaceToTheLeft + 'px';
         }
     }
-
-
-
+    
+    
+    
     return public_;
 }

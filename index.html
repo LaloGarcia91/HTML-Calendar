@@ -59,13 +59,13 @@
                 <li>Input element</li>
                 <li>English</li>
             </ul>
-            
+
             <p data-lalo-calendar-language="english"></p>
-            <input data-lalo-calendar-display-format="long-words" data-lalo-calendar-opener>
+            <input data-lalo-calendar-display-format="long-words" data-lalo-calendar-opener='' id='js-calendar-example-1'>
         </div>
-        
-        
-        
+
+
+
         <div data-lalo-calendar>
             <h4>Example #2</h4>
             <ul>
@@ -79,8 +79,8 @@
             <input data-lalo-calendar-display-format="short-words">
             <button data-lalo-calendar-opener>Open</button>
         </div>
-        
-        
+
+
         <div data-lalo-calendar>
             <h4>Example #3</h4>
             <ul>
@@ -94,9 +94,70 @@
         </div>
 
 
+        <div data-lalo-calendar>
+            <h4>Example #4</h4>
+            <ul>
+                <li>Calendar Format: Short-words</li>
+                <li>Input element</li>
+                <li>If no language was given, the calendar pick up English as default.</li>
+            </ul>
+            <input data-lalo-calendar-display-format="short-words" data-lalo-calendar-opener>
+        </div>
+
 
     </body>
 </html>
-<script src='./js/HTML-Calendar.min.js'></script>
+<script src='./js/ClassPrototype.js'></script>
+<script src='./js/CreateDynamicHTML.js'></script>
+<script src='./js/DateThingsSupport.js'></script>
 
+<script src='./js/AlterCalendarGUI.js'></script>
+<script src='./js/CalendarEventsManager.js'></script>
+<script src='./js/CalendarReferences.js'></script>
+<script src='./js/CalendarSelectors.js'></script>
+<script src='./js/GetCalendarInfos.js'></script>
+<script src='./js/MainCalendarStructureGUI.js'></script>
+<script src='./js/PositionCalendar.js'></script>
+<script src='./js/SaveCalendarInfos.js'></script>
+<script src='./js/CalendarInit.js'></script>
 
+<!--<script src='./js/HTML-Calendar.min.js'></script> -->
+
+<script>
+    // test the calendar
+
+    CalendarTest();
+
+    function CalendarTest(){
+        /*
+            This function serves for you to understand how to retreive the date of a calendar as an object, so you can either save it in a database or something. This way you can "load" the calendar date later on the calendar with the saved date info from your databse.
+        */
+        
+        var example_selector = document.getElementById('js-calendar-example-1');
+        var example_date_obj = example_selector.getAttribute('data-get-date-displayed');
+        var savedDateAsJSON = JSON.parse(example_date_obj);
+        
+        // date language (regardless if date is numeric or 'words' based)
+        var dateLanguage = savedDateAsJSON.language;
+
+        // date formats saved in the date selector
+        var as_index = savedDateAsJSON.dateFormats.as.index;
+        var as_numeric = savedDateAsJSON.dateFormats.as.numeric;
+        var as_shortWords = savedDateAsJSON.dateFormats.as.shortWords;
+        var as_longWords = savedDateAsJSON.dateFormats.as.longWords;
+
+        console.log('***** Calendar Language: '+dateLanguage)
+        console.log(' ')
+        console.log('***** Date formats saved in the selector where the calendar date is displayed:')
+        console.log(' ')
+        console.log('As Index:')
+        console.log(as_index)
+        console.log('As Numeric:')
+        console.log(as_numeric)
+        console.log('As Short Words:')
+        console.log(as_shortWords)
+        console.log('As Long Words:')
+        console.log(as_longWords)
+    }
+
+</script>

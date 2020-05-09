@@ -43,7 +43,7 @@ function SaveCalendarInfos(){
         finalObjToSave.dateFormats.as['longWords'] = 
             private_.GetCalendarInfos.GetDateObjAsLongWords(calendarLanguage, monthIndex, monthDay, year, weekDayIndex);
 
-        selectorThatDisplaysDate.setAttribute('data-date-displayed', JSON.stringify(finalObjToSave));
+        selectorThatDisplaysDate.setAttribute('data-get-date-displayed', JSON.stringify(finalObjToSave));
     }
 
     
