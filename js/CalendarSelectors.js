@@ -13,6 +13,16 @@ function CalendarSelectors(){
     *
     */
     
+    public_.GetCalendarLoader = function(selectorReference){
+        var calendarLoader;
+        while(calendarLoader = selectorReference.parentNode){
+            if(calendarLoader.hasAttribute('data-lalo-calendar')){
+                return calendarLoader;
+            }
+        }
+    }
+    
+    
     public_.GetCalendarWrapper = function(calendarLoader){
         var calendarWrapperRef = private_.selectorsReferences.calendarWrapper.class;
         return calendarLoader.querySelector('.'+calendarWrapperRef);

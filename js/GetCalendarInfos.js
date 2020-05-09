@@ -11,6 +11,7 @@ function GetCalendarInfos(){
     
 
     public_.GetCurrentCalendarDateSelected = function(calendarLoader){
+
         var monthIndex = public_.GetCalendarCurrentMonthIndex(calendarLoader);
         var monthDay = public_.GetCurrentMonthDay(calendarLoader);
         var year = public_.GetCurrentYear(calendarLoader);
@@ -186,8 +187,8 @@ function GetCalendarInfos(){
         var monthsLastElementIndex = allMonthsNames.length -1;
 
         var newIndex;
-        if(currentMonthIndex == 0){
-            newIndex = monthsLastElementIndex;
+        if(currentMonthIndex < 0){
+            newIndex = monthsLastElementIndex; // select december
         } else {
             newIndex = parseInt(currentMonthIndex) - 1;
         }

@@ -30,7 +30,6 @@ function SaveCalendarInfos(){
             }  
         };
 
-        
         finalObjToSave.dateFormats.as['index'] = 
             private_.GetCalendarInfos.GetDateObjAsIndex(monthIndex, monthDay, year, weekDayIndex);
 

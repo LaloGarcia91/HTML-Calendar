@@ -140,7 +140,7 @@ function AlterCalendarGUI(){
             // text
             selectorThatDisplaysDate.textContent = formatedDate;
         }
-
+        
         private_.SaveCalendarInfos.SaveCalendarDateInDateSelectorDisplay(calendarLoader);
     }
 
@@ -262,10 +262,10 @@ function AlterCalendarGUI(){
 
     public_.ShowCalendar = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
-        calendar.style.display = 'block';
+        calendar.style.display = 'block'; // needs to be called first
         public_.DisplayCurrentSavedAndShownDateInCalendar(calendarLoader);
         private_.PositionCalendar.PositionCalendarWhenOpened(calendarLoader);
-        calendar.style.opacity = 1;
+        calendar.style.opacity = 1; // needs to be called last
     }
 
 
@@ -425,6 +425,23 @@ function AlterCalendarGUI(){
         var currentMonthAttrRef = 'data-get-month-name-displayed-index';
         var currentMonthSelector = calendar.querySelector('['+currentMonthAttrRef+']');
         return currentMonthSelector.getAttribute(currentMonthAttrRef);
+    }
+
+    
+    public_.SetNewDateInCalendarAndSelectorDisplay = function(calendarLoader, monthDay, monthIndex, year){
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
+        var language = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
+        var getThisDate = GetThisDateInfo(language, monthIndex, monthDay, year, 'object-numeric');
+        var weekDayIndex = getThisDate.weekDayIndex;
+
+        // set a new month, day and year in the calendar itself
+        public_.DisplayNewMonthInCalendar(calendar, language, monthIndex);
+        public_.DisplayNewYearInCalendar(calendar, year);
+        MainCalendarStructureGUI().DisplayNewDateInCalendar(calendar, monthIndex, year);
+        public_.HighlightMonthdayInCalendar(calendar, monthDay);
+        
+        // display the selected calendar date in the "display date" selector
+        public_.UpdateDateInSelectorDisplay(calendarLoader, monthIndex, monthDay, year, weekDayIndex);
     }
 
     

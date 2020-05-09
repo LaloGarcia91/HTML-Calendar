@@ -1,11 +1,11 @@
 HTML CALENDAR BY LALO GARCIA
-V.2.0
+    MIT LICENCE (obviously)
+    V.2.0
 
 
 You might don't need to read this file if you saw the examples in index.html ... Although, here it is:
 
 ***** How to use the Calendar: *****
-
 
 1. Create a Div and add the attribute: "data-lalo-calendar='' "
 
@@ -38,5 +38,21 @@ You might don't need to read this file if you saw the examples in index.html ...
 
 
 
+****** HOW TO LOAD A DATE IN THE CALENDAR *******
+Here is how you can load/set a date in a calendar, like when you retrieve a date from the DB and you want/need to set the calendar to that date.
+
+Call the following function and pass the correct parameters.
+
+Example with parameters names:
+    LoadDateInLaloCalendar(selectorWhereDateIsDisplayed, monthDay, monthNumber, year);
+
+Example with real values:
+    LoadDateInLaloCalendar('#my-calendar', 18, 1, 2011);
+
+    The above will translate to:
+    18th - January - 2011
 
 
+
+EXTRA NOTES:
+    You might find my names (Lalo) here and there, I use it to prefix references, function names etc. The reason why is to PREVENT any functions or reference selectors that you MAY HAVE in your projects from interfering with namings and references of the Calendar codes. So, by prefixing my functions and HTML selectors references with <my name>, I believe that the above, will be prevented 100%.
