@@ -11,25 +11,27 @@ function PositionCalendar(){
     */
 
     public_.PositionCalendarWhenOpened = function(calendarLoader){
-        private_.PositionCalendarVertically(calendarLoader);
-        private_.PositionCalendarHorizontally(calendarLoader);
+        private_.AutoPositionCalendarVertically(calendarLoader);
+        private_.AutoPositionCalendarHorizontally(calendarLoader);
     }
 
-    
-    
-    private_.PositionCalendarVertically = function(calendarLoader){
+
+
+    private_.AutoPositionCalendarVertically = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
+        var calendarLoaderRects = calendarLoader.getBoundingClientRect();
         var calendarOpener = private_.CalendarSelectors.GetCalendarOpener(calendarLoader);
         var calendarOpenerRects = calendarOpener.getBoundingClientRect();
-        calendar.style.top = calendarOpenerRects.height+'px';
+        var finalTopDistance = calendarLoaderRects.height;
+        calendar.style.top = finalTopDistance+'px';
     }
-    
-    
-    
-    private_.PositionCalendarHorizontally = function(calendarLoader){
+
+
+
+    private_.AutoPositionCalendarHorizontally = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var calendarRects = calendar.getBoundingClientRect();
-        
+
         var calendarOpener = private_.CalendarSelectors.GetCalendarOpener(calendarLoader);
         var calendarOpenerRects = calendarOpener.getBoundingClientRect();
         var calendarOpenerSpaceToTheLeft = calendarOpenerRects.left;
@@ -46,8 +48,8 @@ function PositionCalendar(){
             calendar.style.left = calendarOpenerSpaceToTheLeft + 'px';
         }
     }
-    
-    
-    
+
+
+
     return public_;
 }
