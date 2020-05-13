@@ -62,5 +62,11 @@ function CalendarSelectors(){
         return monthDaySelector;
     }
     
+    
+    public_.GetSelectorHoldingLastSavedDate = function(calendarLoader){
+        return calendarLoader.querySelector('[data-get-date-displayed]');
+    }
+    
+    
     return public_;
 }

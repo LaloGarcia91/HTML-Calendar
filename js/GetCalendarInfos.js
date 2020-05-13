@@ -187,7 +187,7 @@ function GetCalendarInfos(){
         var monthsLastElementIndex = allMonthsNames.length -1;
 
         var newIndex;
-        if(currentMonthIndex < 0){
+        if(currentMonthIndex <= 0){
             newIndex = monthsLastElementIndex; // select december
         } else {
             newIndex = parseInt(currentMonthIndex) - 1;
@@ -196,6 +196,13 @@ function GetCalendarInfos(){
         return newIndex;
     }
 
+    
+    
+    public_.GetTheCurrentSavedDateSoFar = function(calendarLoader){
+        var selector = private_.CalendarSelectors.GetSelectorHoldingLastSavedDate(calendarLoader);
+        var savedDate = selector.getAttribute('data-get-date-displayed');
+        return JSON.parse(savedDate);
+    }
 
     
     return public_;

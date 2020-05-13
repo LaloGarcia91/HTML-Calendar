@@ -324,23 +324,23 @@ function AlterCalendarGUI(){
 
 
     public_.ChangeMonthToNext = function(calendar, language){
-        var currentMontIndexAttr = 'data-get-month-name-displayed-index';
-        var currentMonthIndex = calendar.querySelector('['+currentMontIndexAttr+']');
-        currentMonthIndex = currentMonthIndex.getAttribute(currentMontIndexAttr);
+        var calendarLoader = private_.CalendarSelectors.GetCalendarLoader(calendar);
+        var currentMonthIndex = private_.GetCalendarInfos.GetCalendarCurrentMonthIndex(calendarLoader);
         var allMonthsNames = MonthsArray(language);
         var newMonthIndex = private_.GetCalendarInfos.GetNextMonthIndex(currentMonthIndex, language);
         public_.DisplayNewMonthInCalendar(calendar, language, newMonthIndex);
+        public_.HighlightTheAlreadySavedMonthDayInCalendar(calendarLoader);
     }
 
 
 
     public_.ChangeMonthToPrevious = function(calendar, language){
-        var currentMontIndexAttr = 'data-get-month-name-displayed-index';
-        var currentMonthIndex = calendar.querySelector('['+currentMontIndexAttr+']');
-        currentMonthIndex = currentMonthIndex.getAttribute(currentMontIndexAttr);
+        var calendarLoader = private_.CalendarSelectors.GetCalendarLoader(calendar);
+        var currentMonthIndex = private_.GetCalendarInfos.GetCalendarCurrentMonthIndex(calendarLoader);
         var allMonthsNames = MonthsArray(language);
         var newMonthIndex = private_.GetCalendarInfos.GetPreviousMonthIndex(currentMonthIndex, language);
         public_.DisplayNewMonthInCalendar(calendar, language, newMonthIndex);
+        public_.HighlightTheAlreadySavedMonthDayInCalendar(calendarLoader);
     }
 
     
@@ -376,6 +376,7 @@ function AlterCalendarGUI(){
 
 
     public_.ChangeYearToNext = function(calendar){
+        var calendarLoader = private_.CalendarSelectors.GetCalendarLoader(calendar);
         var currentYearAttr = 'data-current-year-displayed';
         var currentYearSelector = calendar.querySelector('['+currentYearAttr+']');
         currentYearDisplayed = currentYearSelector.getAttribute(currentYearAttr);
@@ -386,11 +387,13 @@ function AlterCalendarGUI(){
 
         public_.currentYearDisplayed = parseInt(newYear);
         public_.UpdateMonthDaysGUI(calendar);
+        public_.HighlightTheAlreadySavedMonthDayInCalendar(calendarLoader);
     }
 
 
 
     public_.ChangeYearToPrevious = function(calendar){
+        var calendarLoader = private_.CalendarSelectors.GetCalendarLoader(calendar);
         var currentYearAttr = 'data-current-year-displayed';
         var currentYearSelector = calendar.querySelector('['+currentYearAttr+']');
         currentYearDisplayed = currentYearSelector.getAttribute(currentYearAttr);
@@ -401,6 +404,7 @@ function AlterCalendarGUI(){
 
         public_.currentYearDisplayed = parseInt(newYear);
         public_.UpdateMonthDaysGUI(calendar);
+        public_.HighlightTheAlreadySavedMonthDayInCalendar(calendarLoader);
     }
 
 
@@ -443,7 +447,34 @@ function AlterCalendarGUI(){
         // display the selected calendar date in the "display date" selector
         public_.UpdateDateInSelectorDisplay(calendarLoader, monthIndex, monthDay, year, weekDayIndex);
     }
+    
+    
+    
+    public_.HighlightTheAlreadySavedMonthDayInCalendar = function(calendarLoader){
+        // this function is more likely to be used when changing calendar months and/or years. So we can highlight the month-day in the calendar if we go back to the date that we have already displayed/saved on the HTML that displays the date to the user.
+        
+        var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
+        
+        var currentDavedDate = private_.GetCalendarInfos.GetTheCurrentSavedDateSoFar(calendarLoader);
+        var dateFormatAsIndex = currentDavedDate.dateFormats.as.index;
+        var monthIndexSaved = dateFormatAsIndex.month;
+        var monthDaySaved = dateFormatAsIndex.day;
+        var yearSaved = dateFormatAsIndex.year;
 
+        var currentMonthIndexInCalendar = 
+            private_.GetCalendarInfos.GetCalendarCurrentMonthIndex(calendar);
+        var currentYearInCalendar = private_.GetCalendarInfos.GetCurrentYear(calendarLoader);
+
+        var monthsAreTheSame = monthIndexSaved == currentMonthIndexInCalendar;
+        var yearsAreTheSame = yearSaved == currentYearInCalendar;
+
+
+        if( monthsAreTheSame && yearsAreTheSame ){
+            public_.HighlightMonthdayInCalendar(calendar, monthDaySaved);   
+        }
+    }
+    
+    
     
     return public_; 
 }
