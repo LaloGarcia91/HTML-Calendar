@@ -68,66 +68,6 @@ function GetCalendarInfos(){
     }
     
     
-    
-    public_.GetDateObjAsIndex = function(monthIndex, monthDay, year, weekDayIndex){
-        return {
-            whatIsThis:'This property returns the calendar date as index format. Meaning, January and Sunday are index 0... This is used this way because JS understands dates as index numbers starting from zero for months and week days.',
-            month:monthIndex,
-            day:monthDay,
-            year:year,
-            weekDay:weekDayIndex
-        };
-    }
-
-
-
-    public_.GetDateObjAsNumeric = function(monthIndex, monthDay, year, weekDayIndex){
-        var monthNumber = monthIndex+1;
-        var weekDayNumber;
-        if(weekDayIndex == 0){
-            weekDayNumber = 7;  
-        }
-
-        return {
-            whatIsThis:'This property returns the calendar date as numeric, January is month # 1, Monday is week day # 1',
-            month:monthNumber,
-            day:monthDay,
-            year:year,
-            weekDay:weekDayNumber
-        };
-    }
-
-
-
-    public_.GetDateObjAsLongWords = function(language, monthIndex, monthDay, year, weekDayIndex){
-        var monthsArray = MonthsArray(language);
-        var weekDaysArray = DaysOfWeekArray(language);
-
-        return {
-            whatIsThis:'This property returns the calendar date as long words: January, February.. Sunday, Monday..',
-            month:monthsArray[monthIndex],
-            day:monthDay,
-            year:year,
-            weekDay:weekDaysArray[weekDayIndex]
-        };
-    }
-
-
-
-    public_.GetDateObjAsShortWords = function(language, monthIndex, monthDay, year, weekDayIndex){
-        var monthsArray = MonthsArray(language);
-        var weekDaysArray = DaysOfWeekArray(language);
-
-        return {
-            whatIsThis:'This property returns the calendar date as short words: Jan, Feb.. Sun, Mon..',
-            month:monthsArray[monthIndex].substring(0, 3),
-            day:monthDay,
-            year:year,
-            weekDay:weekDaysArray[weekDayIndex].substring(0, 3)
-        };
-    }
-    
-    
     public_.GetCalendarLanguage = function(calendarLoader){
         var languageAttr = 'data-lalo-calendar-language';
         var languageSelector = calendarLoader.querySelector('['+languageAttr+']');

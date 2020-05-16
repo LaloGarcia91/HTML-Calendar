@@ -130,8 +130,8 @@
 
     // Example of how you can load/set a date in the calendar.
     // This is useful when you load a date from a database.
-    // Date parameters should be numeric.
-    LoadDateInLaloCalendar('#js-calendar-example-1', 18, 1, 2011);
+    // Date parameters should be numeric. (Ex. January is 1, December is 12...)
+    LoadDateInLaloCalendar('#js-calendar-example-1', 9, 1, 2011);
     
     
 
@@ -146,27 +146,8 @@
         var example_date_obj = example_selector.getAttribute('data-get-date-displayed');
         var savedDateAsJSON = JSON.parse(example_date_obj);
         
-        // date language (regardless if date is numeric or 'words' based)
-        var dateLanguage = savedDateAsJSON.language;
-
-        // date formats saved in the date selector
-        var as_index = savedDateAsJSON.dateFormats.as.index;
-        var as_numeric = savedDateAsJSON.dateFormats.as.numeric;
-        var as_shortWords = savedDateAsJSON.dateFormats.as.shortWords;
-        var as_longWords = savedDateAsJSON.dateFormats.as.longWords;
-
-        console.log('***** Calendar Language: '+dateLanguage)
-        console.log(' ')
-        console.log('***** Date formats saved in the selector where the calendar date is displayed:')
-        console.log(' ')
-        console.log('As Index:')
-        console.log(as_index)
-        console.log('As Numeric:')
-        console.log(as_numeric)
-        console.log('As Short Words:')
-        console.log(as_shortWords)
-        console.log('As Long Words:')
-        console.log(as_longWords)
+        // date saved as numeric, please see console log
+        console.log(savedDateAsJSON)
     }
 
 </script>

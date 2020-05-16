@@ -162,7 +162,7 @@ function MainCalendarStructureGUI(){
         var actualDateAsNumeric = private_.CalendarReferences.currentDateAsNumeric;
         var actualMonthIndex = actualDateAsNumeric.monthIndex;
         var actualMonthName = MonthsArray(private_.calendarLanguage)[actualMonthIndex];
-
+   
         var monthCell = createNewElement({
             element:'td', 
             classes:[

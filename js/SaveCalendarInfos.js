@@ -21,27 +21,17 @@ function SaveCalendarInfos(){
         var monthDay = parseInt(currentDateInCalendar.monthDay);
         var year = parseInt(currentDateInCalendar.year);
         var weekDayIndex = parseInt(currentDateInCalendar.weekDayIndex);
+        
+        if(weekDayIndex == 0) weekDayIndex = 7;
 
-        var calendarLanguage = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
         var finalObjToSave = {
-            language: calendarLanguage,
-            dateFormats:{
-                as: {}
-            }  
+            whatIsThis: "This is the date as numeric. Ex: (January = 1, December = 12 and so on...) (Monday is day 1 in the week, Sunday is day 7 and so on...)",
+            month:(monthIndex+1),
+            day:monthDay,
+            year:year,
+            weekDay:weekDayIndex // monday is day # 1
         };
-
-        finalObjToSave.dateFormats.as['index'] = 
-            private_.GetCalendarInfos.GetDateObjAsIndex(monthIndex, monthDay, year, weekDayIndex);
-
-        finalObjToSave.dateFormats.as['numeric'] = 
-            private_.GetCalendarInfos.GetDateObjAsNumeric(monthIndex, monthDay, year, weekDayIndex);
-
-        finalObjToSave.dateFormats.as['shortWords'] = 
-            private_.GetCalendarInfos.GetDateObjAsShortWords(calendarLanguage, monthIndex, monthDay, year, weekDayIndex);
-
-        finalObjToSave.dateFormats.as['longWords'] = 
-            private_.GetCalendarInfos.GetDateObjAsLongWords(calendarLanguage, monthIndex, monthDay, year, weekDayIndex);
-
+        
         selectorThatDisplaysDate.setAttribute('data-get-date-displayed', JSON.stringify(finalObjToSave));
     }
 
