@@ -69,7 +69,7 @@ function GetCalendarPrototype(){
 
     private_.BuildCalendarLoader = function(){
         var calendarLoader = private_.GetCalendarLoader();
-        
+
         var language = createNewElement({
             element:'div',
             attributes:[
@@ -77,17 +77,15 @@ function GetCalendarPrototype(){
             ]
         });
         calendarLoader.appendChild(language);
-        
-        
-        if(public_.SetInfo.displayDateOnLoad){
-            var displayDateOnload = createNewElement({
-                element:'div',
-                attributes:[
-                    ['data-lalo-calendar-display-date-onload', true]
-                ]
-            });
-            calendarLoader.appendChild(displayDateOnload);
-        }
+
+
+        var displayDateOnload = createNewElement({
+            element:'div',
+            attributes:[
+                ['data-lalo-calendar-display-date-onload', public_.SetInfo.displayDateOnLoad]
+            ]
+        });
+        calendarLoader.appendChild(displayDateOnload);
 
 
         var opener = createNewElement({
@@ -105,8 +103,8 @@ function GetCalendarPrototype(){
         return calendarLoader;
     }
 
-    
-    
+
+
     private_.GetCalendarLoader = function(){
         return createNewElement({
             element:'div',
