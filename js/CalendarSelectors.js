@@ -24,8 +24,12 @@ function CalendarSelectors(){
     
     
     public_.GetCalendarWrapper = function(calendarLoader){
-        var calendarWrapperRef = private_.selectorsReferences.calendarWrapper.class;
-        return calendarLoader.querySelector('.'+calendarWrapperRef);
+        try {
+            var calendarWrapperRef = private_.selectorsReferences.calendarWrapper.class;
+            return calendarLoader.querySelector('.'+calendarWrapperRef);
+        }catch(e){
+            return false;
+        }
     }
     
     

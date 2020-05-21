@@ -55,10 +55,10 @@ Here is how you can load/set a date in a calendar, like when you retrieve a date
 Call the following function and pass the correct parameters.
 
 Example with parameters names:
-    LoadDateInLaloCalendar(selectorWhereDateIsDisplayed, monthDay, monthNumber, year);
+    SetADateInLaloCalendar(selectorWhereDateIsDisplayed, monthDay, monthNumber, year);
 
 Example with real values:
-    LoadDateInLaloCalendar('#my-calendar', 18, 1, 2011);
+    SetADateInLaloCalendar('#my-calendar', 18, 1, 2011);
 
     The above will translate to:
     18th - January - 2011

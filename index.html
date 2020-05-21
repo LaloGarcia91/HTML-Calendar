@@ -105,6 +105,23 @@
         </div>
 
 
+
+        <div> <!--- No calendar loader reference needed --->
+            <h4>Example #5</h4>
+            <ul>
+                <li>The Calendar was loaded in here by using a method that returns the Calendar as an object.</li>
+                <li>We can see how the rules of the calendar were set byt looking at this example in the index file at the bottom.</li>
+                <li>We didn't need to wrap this calendar in a 'data-lalo-calendar' container.</li>
+            </ul>
+            <div id='js-calendar-appended-manually'></div>
+        </div>
+
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </body>
 </html>
 <!--
@@ -119,33 +136,71 @@
 <script src='./js/MainCalendarStructureGUI.js'></script>
 <script src='./js/PositionCalendar.js'></script>
 <script src='./js/SaveCalendarInfos.js'></script>
+<script src='./js/GetCalendarPrototype.js'></script>
 
 <script src='./js/CalendarInit.js'></script>
-<script src='./js/LoadDateInCalendar.js'></script>
+<script src='./js/SetADateInLaloCalendar.js'></script>
 -->
 
 <script src='./js/HTML-Calendar.min.js'></script>
 
+
 <script>
 
-    // Example of how you can load/set a date in the calendar.
-    // This is useful when you load a date from a database.
-    // Date parameters should be numeric. (Ex. January is 1, December is 12...)
-    LoadDateInLaloCalendar('#js-calendar-example-1', 9, 1, 2011);
-    
-    
+
+
 
     CalendarTest();
 
     function CalendarTest(){
+        ExampleOf_HowToSetADateInACalendar();
+        ExampleOf_HowToGetAnObjectOfTheCalendar();
+        ExampleOf_HowToGetTheCalendarDate();
+    }
+
+
+
+    function ExampleOf_HowToGetAnObjectOfTheCalendar(){
+        // Example of how we can get an object prototype of the calendar (as a whole)
+        // and then, append it somewhere in a selector
+
+        var _calendarPrototypeExample = GetCalendarPrototype();
+        var setCalendarInfo = _calendarPrototypeExample.SetInfo;
+        setCalendarInfo.language = 'spanish';
+        setCalendarInfo.displayInInputElement = true;
+        setCalendarInfo.displayFormat = 'short-words';
+        setCalendarInfo.css.id = 'my-calendar-id';
+        setCalendarInfo.css.classes = ['class-1', 'class-2', 'class-3'];
+        var calendarPrototype = _calendarPrototypeExample.GetCalendar();
+
+        document.getElementById('js-calendar-appended-manually').appendChild(calendarPrototype);
+    }
+
+
+
+    function ExampleOf_HowToSetADateInACalendar(){
+        // Example of how you can load/set a date in the calendar.
+        // This is useful when you load a date from a database.
+        // Date parameters should be numeric. (Ex. January is 1, December is 12...)
+
+        var month_day = 9;
+        var month_number = 1;
+        var year = 2011;
+        
+        // this will change the date in the selector below, if you remove the code below. It won't change the date.
+        SetADateInLaloCalendar('#js-calendar-example-1', month_day, month_number, year);
+    }
+
+
+
+    function ExampleOf_HowToGetTheCalendarDate(){
         /*
             This function serves for you to understand how to retreive the date of a calendar as an object, so you can either save it in a database or something. This way you can "load" the calendar date later on the calendar with the saved date info from your databse.
         */
-        
         var example_selector = document.getElementById('js-calendar-example-1');
         var example_date_obj = example_selector.getAttribute('data-get-date-displayed');
         var savedDateAsJSON = JSON.parse(example_date_obj);
-        
+
         // date saved as numeric, please see console log
         console.log(savedDateAsJSON)
     }

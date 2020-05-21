@@ -33,13 +33,13 @@ function CalendarEventsManager(){
     private_.AddEventsToAllCalendars = function(){
         for(var i=0; i<private_.allCalendarsLoaders.length; i++){
             var calendarLoader = private_.allCalendarsLoaders[i];
-            private_.AddEventsToThisCalendar(calendarLoader);
+            public_.AddEventsToThisCalendar(calendarLoader);
         }
     }
 
 
 
-    private_.AddEventsToThisCalendar = function(calendarLoader){
+    public_.AddEventsToThisCalendar = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var language = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
 
@@ -83,6 +83,7 @@ function CalendarEventsManager(){
             private_.PositionCalendar.PositionCalendarWhenOpened(calendarLoader);
         }, false);
     }
+    
 
     return public_;
 }

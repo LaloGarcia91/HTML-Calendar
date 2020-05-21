@@ -31,19 +31,25 @@ function MainCalendarStructureGUI(){
 
         for(var i=0; i<allCalendarsLoaders.length; i++){
             var calendarLoader = allCalendarsLoaders[i];
-            private_.calendarLanguage = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
-            
-            var calendarWrapper = private_.Wrapper();
-            var table = private_.BuildCalendarTable();
-            
-            private_.MakeDateDisplayedAsReadOnly(calendarLoader);
-            calendarWrapper.appendChild(table);
-            calendarLoader.appendChild(calendarWrapper);
+            var calendar = public_.GetCalendarPrototype(calendarLoader);
+            calendarLoader.appendChild(calendar);
         }
+    }
+    
+    
+    
+    public_.GetCalendarPrototype = function(calendarLoader){
+        private_.calendarLanguage = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
+        var calendarWrapper = private_.Wrapper();
+        var table = private_.BuildCalendarTable();
+
+        private_.MakeDateDisplayedAsReadOnly(calendarLoader);
+        calendarWrapper.appendChild(table);
+        return calendarWrapper;
     }
 
 
-
+    
     private_.BuildCalendarTable = function(){
         var table = private_.MainTable();
         var thead = private_.THead();
@@ -333,7 +339,12 @@ function MainCalendarStructureGUI(){
 
 
     private_.MakeDateDisplayedAsReadOnly = function(calendarLoader){
-        calendarLoader.querySelector('[data-lalo-calendar-display-format]').setAttribute('readonly', 'true');
+        var attrRefString = 'data-lalo-calendar-display-format';
+        try {
+            calendarLoader.querySelector('['+attrRefString+']').setAttribute('readonly', 'true');
+        }catch(e){
+            // not an input element
+        }
     }
     
 

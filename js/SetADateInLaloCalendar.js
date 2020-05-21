@@ -1,5 +1,5 @@
 
-function LoadDateInLaloCalendar(selectorReferenceString, monthDay, monthNumber, year){
+function SetADateInLaloCalendar(selectorReferenceString, monthDay, monthNumber, year){
     var _AlterCalendarGUI = AlterCalendarGUI();
     var _CalendarSelectors = CalendarSelectors();
     
