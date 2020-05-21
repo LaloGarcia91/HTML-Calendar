@@ -76,6 +76,7 @@ function CalendarEventsManager(){
 
         var calendarOpener = calendarLoader.querySelector('[data-lalo-calendar-opener]');
         calendarOpener.addEventListener('click', function(e){
+            private_.CalendarSelectors.HideAllCalendars();
             private_.AlterCalendarGUI.ShowCalendar(calendarLoader);
         }, false);
         

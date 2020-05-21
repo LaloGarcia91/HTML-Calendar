@@ -85,6 +85,26 @@ function GetCalendarInfos(){
     }
     
     
+    public_.DisplayActualDateOnLoad = function(calendarLoader){
+        var dateOnLoadAttraRef = 'data-lalo-calendar-display-date-onload';
+        try {
+            var selector = calendarLoader.querySelector('['+dateOnLoadAttraRef+']');
+            var attrValue = selector.getAttribute(dateOnLoadAttraRef);
+
+            switch(attrValue){
+                case 'true': 
+                    return true;
+                    
+                case 'false': 
+                    return false;
+            }
+        }catch(e){
+            // selector was not provided
+        }
+        return true; // show date by default
+    }
+    
+    
     public_.GetCalendarCurrentMonthIndex = function(calendarLoader){
         var monthSelector = private_.CalendarSelectors.GetMonthSelector(calendarLoader);
         var monthIndexAttrRef = 

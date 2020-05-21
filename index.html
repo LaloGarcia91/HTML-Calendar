@@ -94,20 +94,37 @@
         </div>
 
 
+       
         <div data-lalo-calendar>
             <h4>Example #4</h4>
             <ul>
                 <li>Calendar Format: Short-words</li>
                 <li>Input element</li>
-                <li>If no language was given, the calendar pick up English as default.</li>
+                <li>If no language was given, the calendar picks up English as default.</li>
             </ul>
             <input data-lalo-calendar-display-format="short-words" data-lalo-calendar-opener>
         </div>
 
 
 
-        <div> <!--- No calendar loader reference needed --->
+        <div data-lalo-calendar>
             <h4>Example #5</h4>
+            <ul>
+                <li>Calendar Format: Long Words</li>
+                <li>Input element</li>
+                <li>English</li>
+                <li>No date shown onload.</li>
+            </ul>
+
+            <p data-lalo-calendar-display-date-onload="false"></p>
+            <p data-lalo-calendar-language="english"></p>
+            <input data-lalo-calendar-display-format="long-words" data-lalo-calendar-opener='' id='js-calendar-example-1' autocomplete="off">
+        </div>
+        
+
+
+        <div> <!--- No calendar loader reference needed --->
+            <h4>Example #6</h4>
             <ul>
                 <li>The Calendar was loaded in here by using a method that returns the Calendar as an object.</li>
                 <li>We can see how the rules of the calendar were set byt looking at this example in the index file at the bottom.</li>
@@ -115,6 +132,7 @@
             </ul>
             <div id='js-calendar-appended-manually'></div>
         </div>
+
 
 
         <br>
@@ -167,6 +185,7 @@
         var _calendarPrototypeExample = GetCalendarPrototype();
         var setCalendarInfo = _calendarPrototypeExample.SetInfo;
         setCalendarInfo.language = 'spanish';
+        setCalendarInfo.displayDateOnLoad = true;
         setCalendarInfo.displayInInputElement = true;
         setCalendarInfo.displayFormat = 'short-words';
         setCalendarInfo.css.id = 'my-calendar-id';
@@ -186,7 +205,7 @@
         var month_day = 9;
         var month_number = 1;
         var year = 2011;
-        
+
         // this will change the date in the selector below, if you remove the code below. It won't change the date.
         SetADateInLaloCalendar('#js-calendar-example-1', month_day, month_number, year);
     }

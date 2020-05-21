@@ -15,7 +15,8 @@ function GetCalendarPrototype(){
 
     public_.SetInfo = {
         language:'',
-        displayInInputElement:true,
+        displayDateOnLoad:true,
+        displayInInputElement:'true',
         displayFormat: 'short-words', // short-words, long-words, numeric, default
         css:{
             id:'',
@@ -60,18 +61,15 @@ function GetCalendarPrototype(){
 
     private_.SetUpAllTheCalendarDependenciesToWork = function(calendarLoader){
         private_.c_AlterCalendarGUI.DisplayActualDateInCalendar(calendarLoader);
+        private_.c_AlterCalendarGUI.OnloadDisplayActualDateInSelectorDisplay(calendarLoader);
         private_.c_CalendarEventsManager.AddEventsToThisCalendar(calendarLoader);
     }
 
 
 
     private_.BuildCalendarLoader = function(){
-        var calendarLoader = createNewElement({
-            element:'div',
-            attributes:[
-                ['data-lalo-calendar','']
-            ]
-        });
+        var calendarLoader = private_.GetCalendarLoader();
+        
         var language = createNewElement({
             element:'div',
             attributes:[
@@ -79,6 +77,18 @@ function GetCalendarPrototype(){
             ]
         });
         calendarLoader.appendChild(language);
+        
+        
+        if(public_.SetInfo.displayDateOnLoad){
+            var displayDateOnload = createNewElement({
+                element:'div',
+                attributes:[
+                    ['data-lalo-calendar-display-date-onload', true]
+                ]
+            });
+            calendarLoader.appendChild(displayDateOnload);
+        }
+
 
         var opener = createNewElement({
             element:private_.ElementTypeThatDisplaysDate(),
@@ -95,6 +105,16 @@ function GetCalendarPrototype(){
         return calendarLoader;
     }
 
+    
+    
+    private_.GetCalendarLoader = function(){
+        return createNewElement({
+            element:'div',
+            attributes:[
+                ['data-lalo-calendar','']
+            ]
+        });
+    }
 
 
     private_.ElementTypeThatDisplaysDate = function(){

@@ -42,6 +42,7 @@ MEDIA QUERIES
     z-index: 100000;
 }
 
+
 .lalo-calendar-close-btn {
     float:right;
     font-size: 22px;
@@ -51,7 +52,7 @@ MEDIA QUERIES
 }
 
 .lalo-calendar-close-btn:hover {
-    color: red;
+    color: limegreen;
 }
 
 

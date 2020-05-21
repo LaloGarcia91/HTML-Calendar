@@ -10,21 +10,40 @@ function AlterCalendarGUI(){
     private_.GetCalendarInfos = GetCalendarInfos();
     private_.PositionCalendar = PositionCalendar();
     private_.CalendarSelectors = CalendarSelectors();
+    private_.allCalendarsLoaders = document.querySelectorAll('[data-lalo-calendar]');
     //private_.MainCalendarStructureGUI = MainCalendarStructureGUI();
     
     
     public_.Init = function(){
-        public_.DisplayActualDateInAllCalendars();
+        public_.OnloadDisplayActualDateInSelectorDisplayInAllCalendars();
     }
     
     
     
-    public_.DisplayActualDateInAllCalendars = function(){
-        var allCalendarsLoaders = document.querySelectorAll('[data-lalo-calendar]');
-
-        for(var i=0; i<allCalendarsLoaders.length; i++){
-            var calendarLoader = allCalendarsLoaders[i];
+    public_.OnloadDisplayActualDateInSelectorDisplayInAllCalendars = function(){
+        for(var i=0; i<private_.allCalendarsLoaders.length; i++){
+            var calendarLoader = private_.allCalendarsLoaders[i];
             public_.DisplayActualDateInCalendar(calendarLoader);
+            public_.OnloadDisplayActualDateInSelectorDisplay(calendarLoader);
+        }
+    }
+    
+    
+    
+    public_.OnloadDisplayActualDateInSelectorDisplay = function(calendarLoader){
+        var displayDateOnLoad = private_.GetCalendarInfos.DisplayActualDateOnLoad(calendarLoader);
+        if(displayDateOnLoad){
+            public_.DisplayActualDateInSelector(calendarLoader);
+        }
+    }
+
+    
+    
+    public_.DisplayActualDateInAllCalendars = function(){
+        for(var i=0; i<private_.allCalendarsLoaders.length; i++){
+            var calendarLoader = private_.allCalendarsLoaders[i];
+            public_.DisplayActualDateInCalendar(calendarLoader);
+            public_.DisplayActualDateInSelector(calendarLoader);
         }
     }
     
@@ -39,8 +58,7 @@ function AlterCalendarGUI(){
         var monthIndex = currentDate.monthIndex;
         var year = currentDate.year;
         public_.DisplayMonthDays(calendarWrapper, monthIndex, year);
-
-        public_.DisplayActualDateInSelector(calendarLoader);
+        private_.SaveCalendarInfos.SaveCalendarDateInDateSelectorDisplay(calendarLoader);
     }
 
 
@@ -123,7 +141,7 @@ function AlterCalendarGUI(){
 
     public_.DisplayActualDateInSelector = function(calendarLoader){
         var calendarReferences = private_.CalendarReferences;
-
+        
         var actualDate = calendarReferences.currentDateAsNumeric;
         var monthIndex = parseInt(actualDate.monthIndex);
         var day = parseInt(actualDate.monthDay);
@@ -141,7 +159,7 @@ function AlterCalendarGUI(){
         var selectorThatDisplaysDate = calendarLoader.querySelector('[data-lalo-calendar-display-format]');
         var typeOfDisplay = selectorThatDisplaysDate.tagName.toLowerCase();
         var formatedDate = public_.FormatThisDate(calendarLoader, monthIndex, day, year, weekDayIndex);
-
+        
         if(typeOfDisplay == 'input'){
             // value
             selectorThatDisplaysDate.value = formatedDate;

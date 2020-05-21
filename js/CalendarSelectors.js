@@ -72,5 +72,15 @@ function CalendarSelectors(){
     }
     
     
+    
+    public_.HideAllCalendars = function(){
+        var allCalendars = document.querySelectorAll('.js-lalo-calendar--wrapper');
+        for(var i=0; i<allCalendars.length; i++){
+            var calendar = allCalendars[i];
+            calendar.style.display = 'none';
+        }
+    }
+    
+    
     return public_;
 }

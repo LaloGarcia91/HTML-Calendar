@@ -41,6 +41,8 @@ function MainCalendarStructureGUI(){
     public_.GetCalendarPrototype = function(calendarLoader){
         private_.calendarLanguage = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
         var calendarWrapper = private_.Wrapper();
+        calendarWrapper.appendChild(private_.GetCloseBtn());
+        
         var table = private_.BuildCalendarTable();
 
         private_.MakeDateDisplayedAsReadOnly(calendarLoader);
@@ -71,7 +73,6 @@ function MainCalendarStructureGUI(){
                 'js-lalo-calendar--wrapper'
             ]
         });
-        wrapper.appendChild(private_.GetCloseBtn());
         return wrapper;
     }
 
