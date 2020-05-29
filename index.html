@@ -55,13 +55,13 @@
         <div data-lalo-calendar>
             <h4>Example #1</h4>
             <ul>
-                <li>Calendar Format: Long Words</li>
+                <li>Calendar Format: Long-Words</li>
                 <li>Input element</li>
                 <li>English</li>
             </ul>
 
             <p data-lalo-calendar-language="english"></p>
-            <input data-lalo-calendar-display-format="long-words" data-lalo-calendar-opener='' id='js-calendar-example-1'>
+            <input data-lalo-calendar-display-format="default-long" data-lalo-calendar-opener='' id='js-calendar-example-1'>
         </div>
 
 
@@ -69,14 +69,14 @@
         <div data-lalo-calendar>
             <h4>Example #2</h4>
             <ul>
-                <li>Calendar Format: Short Words</li>
+                <li>Calendar Format: Short-Words</li>
                 <li>Input element</li>
                 <li>Calendar Opener is a button</li>
                 <li>Spanish</li>
             </ul>
 
             <p data-lalo-calendar-language="spanish"></p>
-            <input data-lalo-calendar-display-format="short-words">
+            <input data-lalo-calendar-display-format="default-short">
             <button data-lalo-calendar-opener>Open</button>
         </div>
 
@@ -90,11 +90,11 @@
             </ul>
 
             <p data-lalo-calendar-language="french"></p>
-            <span data-lalo-calendar-display-format="numeric" data-lalo-calendar-opener></span>
+            <span data-lalo-calendar-display-format="default-numeric" data-lalo-calendar-opener></span>
         </div>
 
 
-       
+
         <div data-lalo-calendar>
             <h4>Example #4</h4>
             <ul>
@@ -102,7 +102,7 @@
                 <li>Input element</li>
                 <li>If no language was given, the calendar picks up English as default.</li>
             </ul>
-            <input data-lalo-calendar-display-format="short-words" data-lalo-calendar-opener>
+            <input data-lalo-calendar-display-format="default-short" data-lalo-calendar-opener>
         </div>
 
 
@@ -110,7 +110,7 @@
         <div data-lalo-calendar>
             <h4>Example #5</h4>
             <ul>
-                <li>Calendar Format: Long Words</li>
+                <li>Calendar Format: Long-Words</li>
                 <li>Input element</li>
                 <li>English</li>
                 <li>No date shown onload.</li>
@@ -118,9 +118,9 @@
 
             <p data-lalo-calendar-display-date-onload="false"></p>
             <p data-lalo-calendar-language="english"></p>
-            <input data-lalo-calendar-display-format="long-words" data-lalo-calendar-opener='' id='js-calendar-example-1' autocomplete="off">
+            <input data-lalo-calendar-display-format="default-long" data-lalo-calendar-opener='' id='js-calendar-example-1' autocomplete="off">
         </div>
-        
+
 
 
         <div> <!--- No calendar loader reference needed --->
@@ -133,6 +133,39 @@
             <div id='js-calendar-appended-manually'></div>
         </div>
 
+
+
+        <div data-lalo-calendar>
+            <h4>Example #7</h4>
+            <ul>
+                <li>Calendar Format: Custom-short</li>
+                <li>
+                    <i>
+                        <b>Date is custom-made:</b> The program will replace the word "month" with the actual month, "day" with the actual month-day, "year" with the year number, and "weekday" with the correct week-day. It is not necessary to write all of the date words, you can omit some of them like weekday or year. Also, the way you write the date format in here, is how it will be displayed, so if you use a separator like - or / or ', or empty spaces, that's how it will be shown.
+                    </i>
+                </li>
+                <li>Input element</li>
+                <li>English</li>
+                <li>Date shown onload.</li>
+            </ul>
+
+            <p data-lalo-calendar-language="english"></p>
+            <input data-lalo-calendar-display-format="custom-short: month / day / year , weekday" data-lalo-calendar-opener='' id='js-calendar-example-1' autocomplete="off">
+        </div>
+
+
+        <div data-lalo-calendar>
+            <h4>Example #8</h4>
+            <ul>
+                <li>Calendar Format: Custom-long</li>
+                <li>Input element</li>
+                <li>English</li>
+                <li>Date shown onload.</li>
+            </ul>
+
+            <p data-lalo-calendar-language="english"></p>
+            <input data-lalo-calendar-display-format="custom-short: weekday, day-month-year" data-lalo-calendar-opener='' id='js-calendar-example-1' autocomplete="off">
+        </div>
 
 
         <br>
@@ -187,7 +220,7 @@
         setCalendarInfo.language = 'spanish';
         setCalendarInfo.displayDateOnLoad = false;
         setCalendarInfo.displayInInputElement = true;
-        setCalendarInfo.displayFormat = 'short-words';
+        setCalendarInfo.displayFormat = 'default-short';
         setCalendarInfo.css.id = 'my-calendar-id';
         setCalendarInfo.css.classes = ['class-1', 'class-2', 'class-3'];
         var calendarPrototype = _calendarPrototypeExample.GetCalendar();

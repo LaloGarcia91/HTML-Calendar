@@ -1,6 +1,6 @@
 HTML CALENDAR BY LALO GARCIA
     MIT LICENCE (obviously)
-    V.2.0
+    V.3.0
 
 
 --------------
@@ -27,10 +27,21 @@ Although, here it is:
 
 3. Display the date in an HTML selector:
     Create an 'input element (type='text')' or 'p' or 'div' element and add the attributes: 
-        a) Options:
-            a) data-lalo-calendar-display-format='numeric'
-            b) data-lalo-calendar-display-format='short-words'
-            c) data-lalo-calendar-display-format='long-words'
+        a) Options for date format:
+
+            // Default formats options
+            a) data-lalo-calendar-display-format='default-numeric' //shows a dnumeric date
+            b) data-lalo-calendar-display-format='default-short' //shows a date displayed as short words
+            c) data-lalo-calendar-display-format='default-long'//shows a date displayed as long words
+            
+            // Custom Formats Options
+            // This Custom Format options are mean for you to write how you want the date to be displayed, the words: month, day, weekday, year will be replaces by their actual values when the program runs.
+
+            d) data-lalo-calendar-display-format='custom-numeric: month / day / year'
+            e) data-lalo-calendar-display-format='custom-numeric: day / month / year'
+            f) data-lalo-calendar-display-format='custom-short: weekday, day / month / year'
+            g) data-lalo-calendar-display-format='custom-long: weekday - month - day - year'
+            
 
         b) data-lalo-calendar-opener='' (in case you want this element to be the one that opens the calendar, otherwise just create another element like a <button> and add this attribute to it.)
     
@@ -60,9 +71,7 @@ Example with parameters names:
 Example with real values:
     SetADateInLaloCalendar('#my-calendar', 18, 1, 2011);
 
-    The above will translate to:
-    18th - January - 2011
-
+    The above will translate to "18 - January - 2011" following in the calendar, and will be displayed accordingly to how you choosed the date format to be shown (explained in the earlier instructions):
 
 
 ----------------------------

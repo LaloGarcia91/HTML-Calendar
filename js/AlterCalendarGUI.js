@@ -4,7 +4,7 @@ function AlterCalendarGUI(){
     var public_ = classPrototype.members.public;
     var private_ = classPrototype.members.private; 
 
-    
+
     private_.CalendarReferences = CalendarReferences();
     private_.SaveCalendarInfos = SaveCalendarInfos();
     private_.GetCalendarInfos = GetCalendarInfos();
@@ -12,14 +12,14 @@ function AlterCalendarGUI(){
     private_.CalendarSelectors = CalendarSelectors();
     private_.allCalendarsLoaders = document.querySelectorAll('[data-lalo-calendar]');
     //private_.MainCalendarStructureGUI = MainCalendarStructureGUI();
-    
-    
+
+
     public_.Init = function(){
         public_.OnloadDisplayActualDateInSelectorDisplayInAllCalendars();
     }
-    
-    
-    
+
+
+
     public_.OnloadDisplayActualDateInSelectorDisplayInAllCalendars = function(){
         for(var i=0; i<private_.allCalendarsLoaders.length; i++){
             var calendarLoader = private_.allCalendarsLoaders[i];
@@ -27,9 +27,9 @@ function AlterCalendarGUI(){
             public_.OnloadDisplayActualDateInSelectorDisplay(calendarLoader);
         }
     }
-    
-    
-    
+
+
+
     public_.OnloadDisplayActualDateInSelectorDisplay = function(calendarLoader){
         var displayDateOnLoad = private_.GetCalendarInfos.DisplayActualDateOnLoad(calendarLoader);
         if(displayDateOnLoad){
@@ -37,8 +37,8 @@ function AlterCalendarGUI(){
         }
     }
 
-    
-    
+
+
     public_.DisplayActualDateInAllCalendars = function(){
         for(var i=0; i<private_.allCalendarsLoaders.length; i++){
             var calendarLoader = private_.allCalendarsLoaders[i];
@@ -46,12 +46,12 @@ function AlterCalendarGUI(){
             public_.DisplayActualDateInSelector(calendarLoader);
         }
     }
-    
-    
-    
+
+
+
     public_.DisplayActualDateInCalendar = function(calendarLoader){
         var calendarReferences = private_.CalendarReferences;
-        
+
         var calendarWrapper = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var currentDate = calendarReferences.currentDateAsNumeric;
 
@@ -88,7 +88,7 @@ function AlterCalendarGUI(){
     }
 
 
-    
+
     public_.DisplayMonthDays = function(calendarWrapper, monthIndex, year){
         public_.ClearCurrentCalendarDays(calendarWrapper);
 
@@ -117,8 +117,8 @@ function AlterCalendarGUI(){
         public_.HighlightDateIfIsCurrent(calendarWrapper);
     }
 
-    
-    
+
+
     public_.RemoveCalendarLastRowIfEmpty = function(calendarWrapper){
         var monthDaysTbody = calendarWrapper.querySelector('.js-lalo-calendar--table-tbody');
 
@@ -127,8 +127,8 @@ function AlterCalendarGUI(){
         }
     }
 
-    
-    
+
+
     public_.ClearCurrentCalendarDays = function(calendar){
         var allDaysCells = calendar.querySelectorAll('.js-lalo-calendar-table--weeks-days-cells');
         for(var i=0; i<allDaysCells.length; i++){
@@ -137,11 +137,11 @@ function AlterCalendarGUI(){
     }
 
 
-    
+
 
     public_.DisplayActualDateInSelector = function(calendarLoader){
         var calendarReferences = private_.CalendarReferences;
-        
+
         var actualDate = calendarReferences.currentDateAsNumeric;
         var monthIndex = parseInt(actualDate.monthIndex);
         var day = parseInt(actualDate.monthDay);
@@ -150,16 +150,16 @@ function AlterCalendarGUI(){
 
         public_.UpdateDateInSelectorDisplay(calendarLoader, monthIndex, day, year, weekDayIndex);
     }
-    
-    
-    
+
+
+
     public_.UpdateDateInSelectorDisplay = function(calendarLoader, monthIndex, day, year, weekDayIndex){
 
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var selectorThatDisplaysDate = calendarLoader.querySelector('[data-lalo-calendar-display-format]');
         var typeOfDisplay = selectorThatDisplaysDate.tagName.toLowerCase();
         var formatedDate = public_.FormatThisDate(calendarLoader, monthIndex, day, year, weekDayIndex);
-        
+
         if(typeOfDisplay == 'input'){
             // value
             selectorThatDisplaysDate.value = formatedDate;
@@ -167,11 +167,11 @@ function AlterCalendarGUI(){
             // text
             selectorThatDisplaysDate.textContent = formatedDate;
         }
-        
+
         private_.SaveCalendarInfos.SaveCalendarDateInDateSelectorDisplay(calendarLoader);
     }
 
-    
+
 
     public_.GetFormatChoosedForCalendar = function(calendarLoader){
         var formatChoosedAttrRef = 'data-lalo-calendar-display-format';
@@ -186,26 +186,127 @@ function AlterCalendarGUI(){
 
     public_.FormatThisDate = function(calendarLoader, monthIndex, monthDay, year, weekDayIndex){
         var formatChoosed = public_.GetFormatChoosedForCalendar(calendarLoader);
+        
+        var isDefault = formatChoosed.indexOf('default-') == 0;
+        var isCustom = formatChoosed.indexOf('custom-') == 0;
+        var noFormatPassed = formatChoosed == '' || !formatChoosed;
+
+        if(isDefault || noFormatPassed){
+            return private_.GetDefaultFormatDate(calendarLoader, monthIndex, monthDay, year, weekDayIndex);
+        }
+
+        if(isCustom){
+            return private_.GetCustomFormatDate(calendarLoader, monthIndex, monthDay, year, weekDayIndex);
+        }
+    }
+
+
+
+    private_.GetDefaultFormatDate = function(calendarLoader, monthIndex, monthDay, year, weekDayIndex){
+        var formatChoosed = public_.GetFormatChoosedForCalendar(calendarLoader);
         var language = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
         var monthsArray = MonthsArray(language);
         var weekDaysArray = DaysOfWeekArray(language);
 
-        switch(formatChoosed){
-            case 'numeric':
-                return monthDay + " / " + (parseInt(monthIndex)+1) + " / " + year;
+        var numeric = formatChoosed.indexOf('default-numeric') == 0;
+        var short_words = formatChoosed.indexOf('default-short') == 0;
+        var long_words = formatChoosed.indexOf('default-long') == 0;
 
-            case 'short-words':
-                var weekDayName = weekDaysArray[weekDayIndex].substring(0,3);
-                var monthName = monthsArray[monthIndex].substring(0,3);
-                return weekDayName + ' ' + monthDay + ', ' + monthName + ' ' + year;
-
-            case 'long-words':
-                var weekDayName = weekDaysArray[weekDayIndex];
-                var monthName = monthsArray[monthIndex];
-                return weekDayName + ' ' + monthDay + ', ' + monthName + ' ' + year;
+        if(numeric){
+            return (monthDay + " / " + (parseInt(monthIndex)+1) + " / " + year).trim();
         }
+        
+        if(long_words){
+            var weekDayName = weekDaysArray[weekDayIndex];
+            var monthName = monthsArray[monthIndex];
+            return (weekDayName + ', ' + monthDay + ' ' + monthName + ' ' + year).trim();
+        }
+        
+        // short words or Default
+        var weekDayName = weekDaysArray[weekDayIndex].substring(0,3);
+        var monthName = monthsArray[monthIndex].substring(0,3);
+        return (weekDayName + ', ' + monthDay + ' ' + monthName + ' ' + year).trim();
+    }
+    
+    
+    
+    private_.GetCustomFormatDate = function(calendarLoader, monthIndex, monthDay, year, weekDayIndex){
+        var formatChoosed = public_.GetFormatChoosedForCalendar(calendarLoader);
+        var language = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
+        var monthsArray = MonthsArray(language);
+        var weekDaysArray = DaysOfWeekArray(language);
+
+        var numeric = formatChoosed.indexOf('custom-numeric:') == 0;
+        var short_words = formatChoosed.indexOf('custom-short:') == 0;
+        var long_words = formatChoosed.indexOf('custom-long:') == 0;
+
+        if(numeric){
+            if(private_.IsCustomNumericDateFormatValid(formatChoosed)){
+                formatChoosed = formatChoosed.replace('custom-numeric:', '');
+                formatChoosed = formatChoosed.replace('month', monthIndex+1);
+                formatChoosed = formatChoosed.replace('day', monthDay);
+                formatChoosed = formatChoosed.replace('year', year);
+                return formatChoosed.trim();
+            }
+        }
+
+        if(short_words){
+            var weekDayName = weekDaysArray[weekDayIndex].substring(0,3);
+            var monthName = monthsArray[monthIndex].substring(0,3);
+            
+            if(private_.IsCustomDateFormatValid(formatChoosed)){
+                formatChoosed = formatChoosed.replace('custom-short:', '');
+                formatChoosed = formatChoosed.replace('weekday', weekDayName);
+                formatChoosed = formatChoosed.replace('month', monthName);
+                formatChoosed = formatChoosed.replace('day', monthDay);
+                formatChoosed = formatChoosed.replace('year', year);
+                return formatChoosed.trim();
+            }
+        }
+
+        if(long_words){
+            var weekDayName = weekDaysArray[weekDayIndex];
+            var monthName = monthsArray[monthIndex];
+            
+            if(private_.IsCustomDateFormatValid(formatChoosed)){
+                formatChoosed = formatChoosed.replace('custom-long:', '');
+                formatChoosed = formatChoosed.replace('weekday', weekDayName);
+                formatChoosed = formatChoosed.replace('month', monthName);
+                formatChoosed = formatChoosed.replace('day', monthDay);
+                formatChoosed = formatChoosed.replace('year', year);
+                return formatChoosed.trim();
+            }
+        }
+
+        console.log('No custom date format was properly set.. So a default date format is shown in the calendar.')
+        return private_.GetDefaultFormatDate(calendarLoader, monthIndex, monthDay, year, weekDayIndex);
     }
 
+    
+    
+    private_.IsCustomNumericDateFormatValid = function(formatChoosed){
+        var month = formatChoosed.indexOf('month') >= 0;
+        var monthDay = formatChoosed.indexOf('day') >= 0;
+        //var year = formatChoosed.indexOf('year') >= 0;
+        
+        if(month && monthDay){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    
+    private_.IsCustomDateFormatValid = function(formatChoosed){
+        //var month = formatChoosed.indexOf('month') >= 0;
+        var monthDay = formatChoosed.indexOf('day') >= 0;
+       // var year = formatChoosed.indexOf('year') >= 0;
+
+        if(monthDay){
+            return true;
+        }
+        return false;
+    }
 
 
     public_.HighlightMonthIfIsCurrentMonth = function(calendarWrapper){
@@ -223,8 +324,8 @@ function AlterCalendarGUI(){
         }
     }
 
-    
-    
+
+
     public_.IfDisplayedMonthAndYearAreCurrent = function(calendarWrapper){
         var calendarReferences = private_.CalendarReferences;
 
@@ -257,8 +358,8 @@ function AlterCalendarGUI(){
         }
     }
 
-    
-    
+
+
     public_.HighlightClickedMonthDay = function(calendarLoader, monthDayClicked){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
 
@@ -277,9 +378,9 @@ function AlterCalendarGUI(){
         public_.HideCalendar(calendarLoader);
         public_.ShowCalendarDateInSelectorDisplay(calendarLoader);
     }
-    
-    
-    
+
+
+
     public_.HideCalendar = function(calendarLoader){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         calendar.style.display = 'none';
@@ -366,12 +467,12 @@ function AlterCalendarGUI(){
         public_.HighlightTheAlreadySavedMonthDayInCalendar(calendarLoader);
     }
 
-    
+
 
     public_.DisplayNewMonthInCalendar = function(calendar, language, newMonthIndex){
         var allMonthsNames = MonthsArray(language);
         var monthNameSelectorAttr = 'data-get-month-name-displayed';
-       
+
         var monthIndexAttr = 'data-get-month-name-displayed-index';
         var monthSelector = calendar.querySelector('['+monthNameSelectorAttr+']');
         var newMonthName = allMonthsNames[newMonthIndex];
@@ -379,7 +480,7 @@ function AlterCalendarGUI(){
         monthSelector.setAttribute(monthNameSelectorAttr, newMonthName);
         monthSelector.setAttribute(monthIndexAttr, newMonthIndex);
         monthSelector.textContent = newMonthName;
-  
+
         public_.currentIndexOfDisplayedMonth = parseInt(newMonthIndex);
         public_.UpdateMonthDaysGUI(calendar);
     }
@@ -455,7 +556,7 @@ function AlterCalendarGUI(){
         return currentMonthSelector.getAttribute(currentMonthAttrRef);
     }
 
-    
+
     public_.SetNewDateInCalendarAndSelectorDisplay = function(calendarLoader, monthDay, monthIndex, year){
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var language = private_.GetCalendarInfos.GetCalendarLanguage(calendarLoader);
@@ -467,16 +568,16 @@ function AlterCalendarGUI(){
         public_.DisplayNewYearInCalendar(calendar, year);
         MainCalendarStructureGUI().DisplayNewDateInCalendar(calendar, monthIndex, year);
         public_.HighlightMonthdayInCalendar(calendar, monthDay);
-        
+
         // display the selected calendar date in the "display date" selector
         public_.UpdateDateInSelectorDisplay(calendarLoader, monthIndex, monthDay, year, weekDayIndex);
     }
-    
-    
-    
+
+
+
     public_.HighlightTheAlreadySavedMonthDayInCalendar = function(calendarLoader){
         // this function is more likely to be used when changing calendar months and/or years. So we can highlight the month-day in the calendar if we go back to the date that we have already displayed/saved on the HTML that displays the date to the user.
-        
+
         var calendar = private_.CalendarSelectors.GetCalendarWrapper(calendarLoader);
         var currentDavedDate = private_.GetCalendarInfos.GetTheCurrentSavedDateSoFar(calendarLoader);
 
@@ -492,8 +593,8 @@ function AlterCalendarGUI(){
             public_.HighlightMonthdayInCalendar(calendar, currentDavedDate.day);   
         }
     }
-    
-    
-    
+
+
+
     return public_; 
 }

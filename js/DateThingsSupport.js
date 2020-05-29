@@ -1,22 +1,14 @@
 
-
-
-
 function CurrentDate(returnType, language){
-
-
     var weekDay = DaysOfWeekArray(language);
-    var month = MonthsArray(language);
-
+    var months = MonthsArray(language);
 
     var date = new Date();
     var finalWeekDay = weekDay[date.getDay()];
-    var finalMonth = month[date.getMonth()];
+    var finalMonth = months[date.getMonth()];
     var finalDayOfMonth = new Date(date).getDate();
     var year = new Date(date).getFullYear();
 
-
-    //
     var asObject = {
         weekDay:finalWeekDay,
         monthDay:finalDayOfMonth,
@@ -24,19 +16,14 @@ function CurrentDate(returnType, language){
         year:year
     };
 
-    //
     var asNumbers = {
         weekDayIndex:date.getDay(),
         monthDay:finalDayOfMonth,
         monthIndex:date.getMonth(),
         year:year
     };
-
-    //
     var asString = finalWeekDay+", "+finalDayOfMonth+" "+finalMonth+", "+year;
 
-
-    //
     switch(returnType){
         case 'object':
             return asObject; 
@@ -51,21 +38,14 @@ function CurrentDate(returnType, language){
 
 }
 
-//
-//
-//
-//
-//
+
 
 function GetThisDateInfo(language, thisMonth, thisDayOfMonth, thisYear, returnType){
-
     var weekDay = DaysOfWeekArray(language);
     var months = MonthsArray(language);
 
-
     // If month parameter is not an index (number), lets get the index number.
     // We also need to check if the language is not english, try to "convert" everything to english to make our codes works
-
     if(isNaN(thisMonth)){
         thisMonth = DetectMonthLanguageAnd_ReturnIndex(thisMonth);
 
@@ -75,8 +55,6 @@ function GetThisDateInfo(language, thisMonth, thisDayOfMonth, thisYear, returnTy
         }
     }
 
-
-
     var date = new Date(thisYear, thisMonth, thisDayOfMonth);
 
     var finalWeekDay = weekDay[date.getDay()];
@@ -84,8 +62,6 @@ function GetThisDateInfo(language, thisMonth, thisDayOfMonth, thisYear, returnTy
     var finalDayOfMonth = date.getDate();
     var year = date.getFullYear();
 
-
-    //
     var asNumbers = {
         weekDayIndex:date.getDay(),
         monthDay:finalDayOfMonth,
@@ -93,11 +69,9 @@ function GetThisDateInfo(language, thisMonth, thisDayOfMonth, thisYear, returnTy
         year:year
     };
 
-    //
     var asString = finalWeekDay+", "+finalDayOfMonth+" "+finalMonth+", "+year;
 
 
-    //
     switch(returnType){
         case 'object':
             return asObject; 
@@ -113,11 +87,7 @@ function GetThisDateInfo(language, thisMonth, thisDayOfMonth, thisYear, returnTy
 
 }
 
-//
-//
-//
-//
-//
+
 
 function DetectMonthLanguageAnd_ReturnIndex(thisMonth){
 
@@ -149,11 +119,7 @@ function DetectMonthLanguageAnd_ReturnIndex(thisMonth){
     return false;
 }
 
-//
-//
-//
-//
-//
+
 
 function DetectWeekDayLanguageAnd_ReturnIndex(thisWeekDay){
 
@@ -183,57 +149,35 @@ function DetectWeekDayLanguageAnd_ReturnIndex(thisWeekDay){
     return false;
 }
 
-//
-//
-//
-//
-//
+
 
 function DaysInThisMonth(thisMonth, year) {
-
-
-    /*
-    if month parameter is not an index (number), lets get the index number
-    */
+    // if month parameter is not an index (number), lets get the index number
 
     if(isNaN(thisMonth)){
         thisMonth = DetectMonthLanguageAnd_ReturnIndex(thisMonth);
     }
 
-
     var thisDate = new Date(year, thisMonth);
-
     return new Date(thisDate.getFullYear(), thisDate.getMonth() + 1, 0).getDate();
 
 }
 
-//
-//
-//
-//
-//
+
 
 function CurrentMonthName(language){
+    var months = MonthsArray(language);
 
-    var month = MonthsArray(language);
-
-    //
     var date = new Date();
     var monthIndex = date.getMonth();
-    var monthName = month[monthIndex];
+    var monthName = months[monthIndex];
 
-    //
     return monthName;
 }
 
-//
-//
-//
-//
-//
+
 
 function GetDateTime(returnType) {
-
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
@@ -258,7 +202,6 @@ function GetDateTime(returnType) {
         second = '0' + second;
     }
 
-    //
     var dateTimeAsObject = {
         year:year,
         month:month,
@@ -267,7 +210,6 @@ function GetDateTime(returnType) {
         minute:minute,
         seconds:second
     };
-    //
     var dateTimeAsString = year + '/' + month + '/' + day + ' ' + hour + ':' + minute + ':' + second;
 
 
@@ -279,15 +221,9 @@ function GetDateTime(returnType) {
         default:
             return dateTimeAsString;
     }
-
-
 }
 
-//
-//
-//
-//
-//
+
 
 function GetCurrentYear(){
     var now = new Date();
@@ -296,11 +232,7 @@ function GetCurrentYear(){
     return year;
 }
 
-//
-//
-//
-//
-//
+
 
 function MonthsArray(language){
 
@@ -380,14 +312,9 @@ function MonthsArray(language){
     }
 }
 
-//
-//
-//
-//
-//
+
 
 function ReturnAllMonthsAsSelectOptions(returnType, language, capitalize){
-
     var acumulated;
 
     switch(returnType){
@@ -417,18 +344,12 @@ function ReturnAllMonthsAsSelectOptions(returnType, language, capitalize){
 
         return acumulated;
     }
-
 }
 
-//
-//
-//
-//
-//
+
 
 function ReturnThisMonthDaysList(returnType, thisMonth, year){
     var thisMonthDays = DaysInThisMonth(thisMonth, year);
-
 
     switch(returnType){
         case 'html-options':
@@ -444,41 +365,26 @@ function ReturnThisMonthDaysList(returnType, thisMonth, year){
             return false;
     }
 
-
-
     function ReturnAsHTMLoptions(){
         var acumulatedDaysOptions = "";
-
         for(var day=1; day<=thisMonthDays; day++){
 
             acumulatedDaysOptions += "<option value='"+day+"'>"+day+"</option>";
         }
-
         return acumulatedDaysOptions;
     }
-
-
 
     return acumulatedDaysOptions;
 }
 
-//
-//
-//
-//
-//
+
 
 function ReturnCurrentYearAsHTMLoption(){
     var year = GetCurrentYear();
-
     return "<option value='"+year+"'>"+year+"</option>";
 }
 
-//
-//
-//
-//
-//
+
 
 function DaysOfWeekArray(language){
 
@@ -543,21 +449,12 @@ function DaysOfWeekArray(language){
     }
 }
 
-//
-//
-//
-//
-//
+
 
 function ReturnIndexOfFirstWeekDayOfAMonth(language, monthIndex, year){
-
     var getThisDate = GetThisDateInfo(language, monthIndex, 1, year);
     var daysOfWeek = DaysOfWeekArray(language);
 
     return daysOfWeek.indexOf(getThisDate.weekDay);
 }
-
-
-
-
 
